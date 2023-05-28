@@ -18,7 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useEffect } from 'react';
 
-const AdminItem = ({ id, subject, dept, priority, message }) => {
+const AdminItem = ({ id, subject, dept, priority, message, status }) => {
     const [open, setOpen] = useState(false);
     const [age, setAge] = useState(" ");
     const [basicModal, setBasicModal] = useState(false);
@@ -56,6 +56,7 @@ const AdminItem = ({ id, subject, dept, priority, message }) => {
                 <td>{subject}</td>
                 <td>{dept}</td>
                 <td>{priority}</td>
+                <td>{status}</td>
                 <td>
                     <MDBBtn onClick={toggleShow}>View</MDBBtn>
                 </td>

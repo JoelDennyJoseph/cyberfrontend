@@ -75,7 +75,9 @@ export default function AdminHome() {
             <MDBCard className="rounded-3">
               <MDBCardBody className="p-4" style={{position:"relative"}}>
                 <h4 className="text-center">Complaints</h4>
-                <h6 className="text-center my-3 pb-3" onClick={handleSignOut} >Sign out</h6>
+                <h6 className="text-center my-3 pb-3" onClick={handleSignOut} >
+                  <span id="signOut" style={{cursor:"pointer"}}>Sign out</span>
+                </h6>
                 <MDBTable className="mb-4">
                   <MDBTableHead>
                     <tr>
@@ -83,6 +85,7 @@ export default function AdminHome() {
                       <th scope="col"><b>Subject</b></th>
                       <th scope="col"><b>Department</b></th>
                       <th scope="col"><b>Priority</b></th>
+                      <th scope="col"><b>Status</b></th>
                       <th scope="col"><b>Action</b></th>
                     </tr>
                   </MDBTableHead>
@@ -96,6 +99,7 @@ export default function AdminHome() {
                           dept={complaint.department}
                           priority={complaint.priority} 
                           message={complaint.message}
+                          status={complaint.status}
                           uID={complaint.uID}
                         />
                       )

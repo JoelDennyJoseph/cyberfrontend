@@ -21,7 +21,7 @@ import { doc, updateDoc, getFirestore, query, collection, where } from "firebase
 import app  from "../firebase.js";
 const db = getFirestore(app);
 
-const AdminItem = ({ id, subject, dept, priority, message, uID }) => {
+const AdminItem = ({ id, subject, dept, priority, message, uID, status }) => {
     const [open, setOpen] = useState(false);
     const [age, setAge] = useState(" ");
     const [basicModal, setBasicModal] = useState(false);
@@ -59,6 +59,7 @@ const AdminItem = ({ id, subject, dept, priority, message, uID }) => {
                 <td>{subject}</td>
                 <td>{dept}</td>
                 <td>{priority}</td>
+                <td>{status}</td>
                 <td>
                     <MDBBtn onClick={toggleShow}>View</MDBBtn>
                 </td>

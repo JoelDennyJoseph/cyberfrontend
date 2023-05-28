@@ -64,7 +64,7 @@ function Login() {
                 user=="other@cyber.com"){
         navigate('/dept');
       } else {
-        navigate('/dashboard');
+        navigate('/otp');
       }
       // ...
     })
@@ -95,7 +95,7 @@ function Login() {
           </MDBCol>
           
           <MDBCol md='6'>
-            <MDBCardBody className='d-flex flex-column'>
+            <MDBCardBody className='d-flex flex-column' style={{position:"fixed",width:"35vw"}}>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
               
               <h2 className="fw-bold my-4 pb-3" style={{letterSpacing: '1px'}}>Cyber Complaint Automation System</h2>
@@ -110,7 +110,6 @@ function Login() {
               <form onSubmit={handleSubmit}>
                 <MDBInput ref={userRef} wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" autoComplete='off'
                 onChange={(e)=> setUser(e.target.value)} value={user} required/>
-                
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"
                 autoComplete='off' onChange={(e)=> setPwd(e.target.value)} value={pwd} required/>
 

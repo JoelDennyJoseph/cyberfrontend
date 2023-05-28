@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 // const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
-
+// const REGISTER_URL = '/register';
+const EMAIL_REGEX= /\S+@\S+\.\S+/;
 import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore } from "firebase/firestore";
@@ -26,6 +26,8 @@ function Register() {
     const [userFocus, setUserFocus] = useState(false);
 
     const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
@@ -53,6 +55,10 @@ function Register() {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd == matchPwd);
     }, [pwd, matchPwd])
+
+    useEffect(() => {
+      setValidEmail(EMAIL_REGEX.test(email));
+  }, [email])
 
     useEffect(() => {
         setErrMsg('');
@@ -108,8 +114,7 @@ function Register() {
             
             <MDBInput wrapperClass='mb-4' label='Your Name' size='lg' id='form1' type='text' required
             onChange={(e) => setUser(e.target.value)} value={user} onFocus={() => setUserFocus(true)} onBlur={() => setUserFocus(false)}/>
-            {/* <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} /> */}
-            {/* <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} /> */}
+            
             
             <MDBInput wrapperClass='mb-4' label='Your Email' size='lg' id='form2' type='email' required
             onChange={(e) => setEmail(e.target.value)} value={email} />
@@ -126,7 +131,7 @@ function Register() {
             </div>
             
             <MDBBtn type='submit' className='mb-4 w-100 gradient-custom-4' size='lg'
-             //disabled={ !validName || !validPwd || !validMatch || !agreement} 
+             disabled={ !validName || !validPwd || !validMatch || !agreement || !validEmail} 
              >Register</MDBBtn>
              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Already have an account? <Link to="/">Login</Link></p>
           </form>

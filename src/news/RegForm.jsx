@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   MDBInput,
   MDBCheckbox,
@@ -22,6 +22,9 @@ export default function RegForm() {
     const navigate = useNavigate();
     const db = getFirestore(app);
     const [agreement,setAgreement] = useState(false);
+
+    const subjectElement = useRef(null);
+    const messageElement = useRef(null);
      
     useEffect(() => {
       const auth = getAuth();
@@ -147,13 +150,19 @@ export default function RegForm() {
       <div className="form-outline">
         <textarea className="form-control" id="textAreaExample1" rows="2"
         onChange={(e) => setSubject(e.target.value)} value={subject}></textarea>
-        <label className="form-label">Subject</label>
+        {(subject.length>0 && document.activeElement!==subjectElement.current) ?
+        <label ref={subjectElement} className="form-label" style={{display:"none"}}>Subject</label>
+        :<label ref={subjectElement} className="form-label" >Subject</label>}
+        {/* style={subject.length>0 && document.activeElement!=subjectElement.current ? "hidden" : "show" */}
       </div>
 
       <div className="form-outline">
         <textarea className="form-control" id="textAreaExample1" rows="4"
         onChange={(e) => setMessage(e.target.value)} value={message}></textarea>
-        <label className="form-label">Complaint Description</label>
+        {(message.length>0 && document.activeElement!==messageElement.current) ?
+        <label ref={messageElement} className="form-label" style={{display:"none"}}>Complaint Description</label>
+        :<label ref={messageElement} className="form-label" >Complaint Description</label>}
+        {/* <label className="form-label">Complaint Description</label> */}
       </div>
       
       <p className="lead">*Input should be atleast 10 characters</p>

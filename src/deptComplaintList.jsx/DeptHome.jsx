@@ -100,6 +100,7 @@ export default function DeptHome() {
                       <th scope="col"><b>Subject</b></th>
                       <th scope="col"><b>Department</b></th>
                       <th scope="col"><b>Priority</b></th>
+                      <th scope="col"><b>Status</b></th>
                       <th scope="col"><b>Action</b></th>
                     </tr>
                   </MDBTableHead>
@@ -111,7 +112,8 @@ export default function DeptHome() {
                           id={complaint.complaintId}
                           subject={complaint.subject}
                           dept={complaint.department}
-                          priority={complaint.priority} 
+                          priority={complaint.priority}
+                          status={complaint.status} 
                           message={complaint.message}
                         />
                       )
