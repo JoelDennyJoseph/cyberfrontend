@@ -40,32 +40,55 @@ export default function RegForm() {
     }, []);
 
     //funtion for classification model
+    // async function classify(data) {
+    //   const response = await fetch(
+    //     "https://api-inference.huggingface.co/models/joeldenny/finalclassificationmodel",
+    //     {
+    //       headers: { Authorization: "Bearer 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" },
+    //       method: "POST",
+    //       body: JSON.stringify(data),
+    //     }
+    //   );
+    //   const result = await response.json();
+    //   return result;
+    // }
     async function classify(data) {
-      const response = await fetch(
-        "https://api-inference.huggingface.co/models/joeldenny/finalclassificationmodel",
-        {
-          headers: { Authorization: "Bearer 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" },
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
-      const result = await response.json();
-      return result;
-    }
-
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/joeldenny/cyber_classification",
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.json();
+	return result;
+}
     //function for priority model
+    // async function priority(data) {
+    //   const response = await fetch(
+    //     "https://api-inference.huggingface.co/models/joeldenny/priority-model",
+    //     {
+    //       headers: { Authorization: "Bearer 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" },
+    //       method: "POST",
+    //       body: JSON.stringify(data),
+    //     }
+    //   );
+    //   const result = await response.json();
+    //   return result;
+    // }
     async function priority(data) {
-      const response = await fetch(
-        "https://api-inference.huggingface.co/models/joeldenny/priority-model",
-        {
-          headers: { Authorization: "Bearer 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" },
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
-      const result = await response.json();
-      return result;
-    }
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/joeldenny/cyber_prioritization",
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.json();
+	return result;
+}
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -74,12 +97,11 @@ export default function RegForm() {
       let pri;
       
       const classMapper = {
-        "LABEL_0": "ACCOUNTS",
-        "LABEL_1": "DEBT",
-        "LABEL_2": "CREDIT",
-        "LABEL_3": "LOAN",
-        "LABEL_4": "CREDIT CARD",
-        "LABEL_5": "OTHER"
+        "LABEL_0": "OTHER",
+        "LABEL_1": "ACCOUNTS",
+        "LABEL_2": "PHONE",
+        "LABEL_3": "FINANCE",
+        "LABEL_4": "BLACKMAIL",
       }
 
       const priorityMapper = {
