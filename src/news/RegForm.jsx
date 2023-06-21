@@ -46,6 +46,18 @@ export default function RegForm() {
     }, []);
 
     //funtion for classification model
+    // async function classify(data) {
+    //   const response = await fetch(
+    //     "https://api-inference.huggingface.co/models/joeldenny/finalclassificationmodel",
+    //     {
+    //       headers: { Authorization: "Bearer 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" },
+    //       method: "POST",
+    //       body: JSON.stringify(data),
+    //     }
+    //   );
+    //   const result = await response.json();
+    //   return result;
+    // }
     async function classify(data) {
       const response = await fetch(
         "https://api-inference.huggingface.co/models/joeldenny/final_cyber_model",
@@ -60,18 +72,30 @@ export default function RegForm() {
     }
 
     //function for priority model
+    // async function priority(data) {
+    //   const response = await fetch(
+    //     "https://api-inference.huggingface.co/models/joeldenny/priority-model",
+    //     {
+    //       headers: { Authorization: "Bearer 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" },
+    //       method: "POST",
+    //       body: JSON.stringify(data),
+    //     }
+    //   );
+    //   const result = await response.json();
+    //   return result;
+    // }
     async function priority(data) {
-      const response = await fetch(
-        "https://api-inference.huggingface.co/models/joeldenny/priority-model",
-        {
-          headers: { Authorization: "Bearer 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" },
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
-      const result = await response.json();
-      return result;
-    }
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/joeldenny/cyber_prioritization",
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.json();
+	return result;
+}
 
     const handleSubmit = async (e) => {
       e.preventDefault();
