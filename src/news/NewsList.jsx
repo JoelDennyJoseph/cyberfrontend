@@ -20,7 +20,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 const NewsList = () => {
+    
     const [articles, setArticles] = useState([])
+    const [navbar,setNavbar] = useState(false);
+
     const navigate = useNavigate();
     const auth = getAuth();
     useEffect(() => {
@@ -51,21 +54,36 @@ const NewsList = () => {
 
     }
 
+    const changeBackground = ()=>{
+      if(window.scrollY >=200) setNavbar(true);
+      else setNavbar(false);
+    }
+    window.addEventListener('scroll',changeBackground);
+   
+    const showNav = ()=>{
+      if(navbar)
+        setNavbar(false);
+    }
+    const hideNav = ()=>{
+      if(navbar)
+        setNavbar(true);
+    }
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav onMouseEnter={showNav} onMouseLeave={hideNav} className={navbar?"navbar active navbar-expand-lg navbar-dark ":"navbar navbar-expand-lg navbar-dark bg-primary"}>
         <div className="container-fluid">
           <a className="navbar-brand" href="#">Cyber Complaint Automation System</a>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <MDBBtn onClick={toggleShow}>Register complaint</MDBBtn>
+                <MDBBtn className={navbar?"active":""} onClick={toggleShow}>Register complaint</MDBBtn>
               </li>
               <li className="nav-item" style={{marginRight:"3%"}}>
-                <MDBBtn onClick={toggleShow2}>Track complaint</MDBBtn>
+                <MDBBtn className={navbar?"active":""} onClick={toggleShow2}>Track complaint</MDBBtn>
               </li>
               <li className="nav-item" style={{marginRight:"3%"}}>
-                <MDBBtn onClick={handleSignOut}>Sign Out</MDBBtn>
+                <MDBBtn className={navbar?"active":""} onClick={handleSignOut}>Sign Out</MDBBtn>
               </li>
             </ul>
           </div>

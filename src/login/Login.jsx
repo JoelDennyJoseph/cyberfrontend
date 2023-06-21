@@ -56,10 +56,9 @@ function Login() {
       console.log("User logged In : "+user);
       if(user=="admin@cyber.com"){
         navigate('/admin');
-      } else if(user=="debt@cyber.com" || 
-                user=="credit@cyber.com" || 
-                user=="creditcard@cyber.com" || 
-                user=="loan@cyber.com" || 
+      } else if(user=="phonelost@cyber.com" || 
+                user=="finance@cyber.com" || 
+                user=="blackmail@cyber.com" || 
                 user=="accounts@cyber.com" || 
                 user=="other@cyber.com"){
         navigate('/dept');

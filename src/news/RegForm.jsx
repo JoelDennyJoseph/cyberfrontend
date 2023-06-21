@@ -14,6 +14,12 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function RegForm() {
     const [message,setMessage] = useState("");
@@ -42,7 +48,7 @@ export default function RegForm() {
     //funtion for classification model
     async function classify(data) {
       const response = await fetch(
-        "https://api-inference.huggingface.co/models/joeldenny/finalclassificationmodel",
+        "https://api-inference.huggingface.co/models/joeldenny/final_cyber_model",
         {
           headers: { Authorization: "Bearer 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" },
           method: "POST",
@@ -69,17 +75,15 @@ export default function RegForm() {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      
       let dept;
       let pri;
       
       const classMapper = {
-        "LABEL_0": "ACCOUNTS",
-        "LABEL_1": "DEBT",
-        "LABEL_2": "CREDIT",
-        "LABEL_3": "LOAN",
-        "LABEL_4": "CREDIT CARD",
-        "LABEL_5": "OTHER"
+        "LABEL_0": "OTHER",
+        "LABEL_1": "ACCOUNTS",
+        "LABEL_2": "PHONE",
+        "LABEL_3": "FINANCE",
+        "LABEL_4": "BLACKMAIL"
       }
 
       const priorityMapper = {
@@ -141,7 +145,22 @@ export default function RegForm() {
         uID: docRef.id
       });
       console.log("Complaintee: " + cId);
+
+      setMessage("");
+      setSubject("");
+      setOpen(true);
     }
+
+    //flash function logic
+    const [open, setOpen] = React.useState(false);  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
+
+    
 
     return (
     <form className="reg_form" onSubmit={handleSubmit}>
@@ -186,6 +205,13 @@ export default function RegForm() {
       
       {/* label='I have read the rules and regulations' */}
       <MDBBtn type='submit' className='mb-4' block disabled={message.length<10 || !agreement}>Submit</MDBBtn>
+     
+      {/* flash message */}
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Form has been submitted successfully!
+        </Alert>
+      </Snackbar>
     </form>
   );
 }

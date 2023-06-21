@@ -25,6 +25,32 @@
 .news-img {
     width: 400px;
 }
+
+.news_heading
+{
+    margin:5% 0;
+}
+
+.navbar 
+{
+    position: fixed;
+    width: 100vw;
+    top:0%;
+}
+
+.active
+{
+    background: transparent !important;
+    box-shadow: none !important;
+    color: black !important;
+    font-size: 1rem;
+}
+
+.ripple-surface
+{
+    font-size: 1rem;
+    font-weight:lighter;
+}
 .navbar-collapse
 {
     justify-content: flex-end;
